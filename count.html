@@ -22,12 +22,15 @@
             border-radius: 8px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.5);
         }
-
+       
         textarea {
             width: 100%;
-         
             min-height: 50px; 
-            height: auto;     
+            height: auto;
+            
+           
+            max-height: 80vh; 
+            
             box-sizing: border-box;
             font-size: 16px;
             padding: 10px;
@@ -35,9 +38,12 @@
             color: #f4f4f4; 
             border: 1px solid #444; 
             border-radius: 4px;
-            resize: none; 
-            overflow-y: hidden; 
+            resize: none;
+            
+         
+            overflow-y: auto; 
         }
+        
         .controls {
             display: flex;
             justify-content: space-between;
@@ -82,7 +88,7 @@
     <div class="container">
         <h2>文字数カウンター</h2>
         
-        <textarea id="text-input" placeholder="ここに文字を入力してください"></textarea>
+        <textarea id="text-input" placeholder="ここに文字を入力してください..."></textarea>
         
         <div class="controls">
             <button id="clear-button">クリア</button>
@@ -94,23 +100,21 @@
     </div>
 
     <script>
-        const charLimit = 100;
+        const charLimit = 1000;
 
         const textInput = document.getElementById('text-input');
         const charCount = document.getElementById('char-count');
         const clearButton = document.getElementById('clear-button');
 
-               function adjustHeight() {
-           
+        
+        function adjustHeight() {
             textInput.style.height = 'auto';
-           
             const scrollHeight = textInput.scrollHeight;
-          
             textInput.style.height = scrollHeight + 'px';
         }
 
+        
         textInput.addEventListener('input', () => {
-            
             const text = textInput.value;
             const count = text.length;
             charCount.textContent = count;
@@ -126,11 +130,9 @@
         });
 
         clearButton.addEventListener('click', () => {
-           
             textInput.value = '';
             charCount.textContent = 0;
             charCount.classList.remove('warning');
-
             adjustHeight();
         });
     </script>
